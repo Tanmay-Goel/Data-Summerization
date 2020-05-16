@@ -1,7 +1,7 @@
 import re
 import string
 
-f=open(r"C:\Users\goelt\Downloads\university.txt")
+f=open(r"C:\Users\tanmay\Downloads\university.txt") #enter file name
 
 input_str=f.read()
 
