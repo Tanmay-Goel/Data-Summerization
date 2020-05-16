@@ -1,8 +1,8 @@
 import re
 import string
 
-f=open(r"C:\Users\tanmay\Downloads\university.txt") #enter file name
-
+f=open(r"C:\Users\tanmay\Downloads\ai.txt", encoding="utf-8") #enter file name.  
+#encoding part not required for university.txt    required for ai,ml,computer.txt
 input_str=f.read()
 
 #lowercase
