@@ -84,19 +84,7 @@ def clean_bms():
         with codecs.open(i, 'r', encoding='utf8') as f:
             input_str = f.read()
         
-    #lowercase
-    input_str = input_str.lower() 
-    
-    y=re.compile(r'â€“')
-    s=1
-    while s==1:
-        m=re.search(y,input_str)
-        if m==None:
-            s=0
-        else:
-            input_str=re.sub(y, "-", input_str)
-    
-    #removing excess inbetween whitespace
+     #removing excess inbetween whitespace
     _RE_COMBINE_WHITESPACE = re.compile(r"(?a:\s+)")
     _RE_STRIP_WHITESPACE = re.compile(r"(?a:^\s+|\s+$)")
     input_str = _RE_COMBINE_WHITESPACE.sub(" ", input_str)
@@ -123,28 +111,37 @@ def clean_bms():
         b+=a
     input_str=b
     
-    #restoring B.M.S
-    y=re.compile(r"b\.M\.S")
+    #restoring BMS
+    y=re.compile(r"B\.M\.S.")
     s=1
     while s==1:
         m=re.search(y,input_str)
         if m==None:
             s=0
         else:
-            input_str=re.sub(y, "b.m.s.", input_str)
+            input_str=re.sub(y, "BMS ", input_str)
     
-    #restoring B.E.
-    y=re.compile(r"b\.E")
+    #restoring BE
+    y=re.compile(r"B\.E")
     s=1
     while s==1:
         m=re.search(y,input_str)
         if m==None:
             s=0
         else:
-            input_str=re.sub(y, "b.e.", input_str)
-    
-    
+            input_str=re.sub(y, "BE ", input_str)
+   
+    #replacing i.e. with that is        
+    y=re.compile(r"i\.e\.")
+    s=1
+    while s==1:
+        m=re.search(y,input_str)
+        if m==None:
+            s=0
+        else:
+            input_str=re.sub(y, ",that is", input_str)
             
+    #wrong character        
     y=re.compile(r'â€“')
     s=1
     while s==1:
@@ -153,7 +150,8 @@ def clean_bms():
             s=0
         else:
             input_str=re.sub(y, "-", input_str)
-            
+    
+    #wrong character        
     y=re.compile(r'â€™')
     s=1
     while s==1:
@@ -162,6 +160,26 @@ def clean_bms():
             s=0
         else:
             input_str=re.sub(y, "'", input_str)
+    #date format with slash        
+    y=re.compile(r'(\d{1,2})\.(\d{1,2})\.(\d{4})')
+    s=1
+    while s==1:
+        m=re.search(y,input_str)
+        if m==None:
+            s=0
+        else:
+            input_str=re.sub(y, '\\1/\\2/\\3', input_str)
+   
+    #Name abbriviation correction        
+    y=re.compile(r'(Sri)\. (\w{1})\. (\w{1})\.')
+    s=1
+    while s==1:
+        m=re.search(y,input_str)
+        if m==None:
+            s=0
+        else:
+            input_str=re.sub(y, '\\1 \\2 \\3', input_str)
+
     
        
     print("Data Pre-processing completed...")
