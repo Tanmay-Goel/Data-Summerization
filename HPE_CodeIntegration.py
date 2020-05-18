@@ -123,7 +123,7 @@ def clean_bms():
         b+=a
     input_str=b
     
-    #restoring b.m.s
+    #restoring B.M.S
     y=re.compile(r"b\.M\.S")
     s=1
     while s==1:
@@ -133,7 +133,7 @@ def clean_bms():
         else:
             input_str=re.sub(y, "b.m.s.", input_str)
     
-    #restoring b.e
+    #restoring B.E.
     y=re.compile(r"b\.E")
     s=1
     while s==1:
@@ -144,7 +144,7 @@ def clean_bms():
             input_str=re.sub(y, "b.e.", input_str)
     
     
-    #restoring some hyphen       
+            
     y=re.compile(r'â€“')
     s=1
     while s==1:
@@ -152,10 +152,18 @@ def clean_bms():
         if m==None:
             s=0
         else:
-            input_str=re.sub(y, " ", input_str)
-
-
-        
+            input_str=re.sub(y, "-", input_str)
+            
+    y=re.compile(r'â€™')
+    s=1
+    while s==1:
+        m=re.search(y,input_str)
+        if m==None:
+            s=0
+        else:
+            input_str=re.sub(y, "'", input_str)
+    
+       
     print("Data Pre-processing completed...")
     
 def pdf_extraction():
